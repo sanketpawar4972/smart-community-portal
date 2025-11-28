@@ -1,5 +1,3 @@
-
-
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -14,7 +12,6 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
-
 
 dotenv.config();
 connectDB();
@@ -33,24 +30,25 @@ app.use("/api/events", eventRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("Smart Community Portal API is running...");
-});
-
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+// Static assets for deployment
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve frontend
 if (process.env.NODE_ENV === "production") {
+  // Serve frontend build folder
   app.use(express.static(path.join(__dirname, "../frontend/build")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
   });
+} else {
+  // Development mode helper
+  app.get("/", (req, res) => {
+    res.send("Smart Community Portal API is running in Development Mode...");
+  });
 }
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
