@@ -39,7 +39,8 @@ if (process.env.NODE_ENV === "production") {
   // Serve frontend build folder
   app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-  app.get("(.*)", (req, res) => {
+ // Serve frontend for any unknown route
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
 
