@@ -1,0 +1,31 @@
+# ===========================
+# GLOBAL IGNORE
+# ===========================
+node_modules/
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===========================
+# BACKEND IGNORE
+# ===========================
+backend/node_modules/
+backend/.env
+
+# Backend build artifacts (if any)
+backend/dist/
+backend/.cache/
+
+# ===========================
+# FRONTEND IGNORE
+# ===========================
+frontend/node_modules/
+frontend/build/
+
+# React env files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
